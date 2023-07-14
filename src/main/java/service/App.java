@@ -1,19 +1,18 @@
 package service;
 
-import decorator.SpamUrlCommentDecorator;
-import decorator.TrimCommentDecorator;
+import decorator.ConcreteDecoratorA;
+import decorator.ConcreteDecoratorB;
+import decorator.Decorator;
 
 public class App {
 
     public static void main(String[] args) {
-        CommentService commentService = new DefaultCommentService();
-        commentService = new SpamUrlCommentDecorator(commentService);
-        commentService = new TrimCommentDecorator(commentService);
+        Component component = new ConcreteComponent();
+        component = new Decorator(component);
+        component = new ConcreteDecoratorB(component);
+        component = new ConcreteDecoratorA(component);
 
-        commentService.addComment("http://www.google.com");
-        commentService.addComment("Hello...");
-        commentService.addComment("World!");
-
+        component.operation();
 
     }
 }
